@@ -9,12 +9,15 @@ import java.io.File;
 
 public class Application {
     public static void main(String[] args) throws Exception {
+        Channel channel = getObjectFromXml();
+    }
+
+    private static Channel getObjectFromXml() throws JAXBException {
         File file = new File("src/test/resources/outages.xml");
         try {
             JAXBContext jaxbContext = jaxbContext = JAXBContext.newInstance(Channel.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-            Channel channel = (Channel) jaxbUnmarshaller.unmarshal(file);
-            System.out.println(channel);
+            return (Channel) jaxbUnmarshaller.unmarshal(file);
         } catch (JAXBException e) {
             System.out.println(e.getMessage());
             throw e;

@@ -11,6 +11,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlRootElement( name = "item")
 public class Item {
 
+    private final static String NAMESPACE = "http://www.sqills.com/james/";
+
     @Getter
     @XmlElement(name="title")
     private String title;
@@ -20,23 +22,23 @@ public class Item {
     private String category;
 
     @Getter
-    @XmlElement(name="ticketNumber", namespace="http://www.sqills.com/james/")
+    @XmlElement(name="ticketNumber", namespace=NAMESPACE)
     private String ticketNumber;
 
     @Getter
-    @XmlElement(name="postalCodes", namespace="http://www.sqills.com/james/")
+    @XmlElement(name="postalCodes", namespace=NAMESPACE)
     private String postalCodes;
 
     @Getter
-    @XmlElement(name="expectedEndDate", namespace="http://www.sqills.com/james/")
+    @XmlElement(name="expectedEndDate", namespace=NAMESPACE)
     private String expectedEndDate;
 
     @Getter
-    @XmlElement(name="category", namespace="http://www.sqills.com/james/")
+    @XmlElement(name="category", namespace=NAMESPACE)
     private String category2;
 
     @Getter
-    @XmlElement(name="locations", namespace="http://www.sqills.com/james/")
+    @XmlElement(name="locations", namespace=NAMESPACE)
     private String locations;
 
     @Getter
