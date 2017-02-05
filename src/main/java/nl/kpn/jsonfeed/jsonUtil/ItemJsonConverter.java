@@ -3,6 +3,8 @@ package nl.kpn.jsonfeed.jsonUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import nl.kpn.jsonfeed.model.Item;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,6 +17,8 @@ import java.util.stream.Stream;
  * data into newly created JSON files
  */
 public class ItemJsonConverter {
+    private static final Logger logger = LoggerFactory.getLogger(ItemJsonConverter.class);
+
     public void toJsonFile(List<Item> items, String businessFilePath, String customerFilePath) throws IOException {
         Gson gson = new GsonBuilder().
                 setPrettyPrinting().
@@ -29,7 +33,7 @@ public class ItemJsonConverter {
             Stream streamCustomer = items.stream().filter(item -> !item.getLocations().matches(".*(ZMST|ZMOH).*"));
             gson.toJson(streamCustomer.collect(Collectors.toList()), customerFileWriter);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            logger.error("error occurred while converting the object to json file", e);
             throw e;
         }
     }
