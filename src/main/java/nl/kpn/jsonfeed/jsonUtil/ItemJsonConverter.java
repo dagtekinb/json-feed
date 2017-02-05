@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -28,9 +29,11 @@ public class ItemJsonConverter {
                      new FileWriter(businessFilePath);
              FileWriter customerFileWriter =
                      new FileWriter(customerFilePath)) {
-            Stream streamBusiness = items.stream().filter(item -> item.getLocations().matches(".*(ZMST|ZMOH).*"));
+            Stream streamBusiness = items.stream().filter(Objects::nonNull).filter(item -> item.getLocations() != null)
+                    .filter(item -> item.getLocations().matches(".*(ZMST|ZMOH).*"));
             gson.toJson(streamBusiness.collect(Collectors.toList()), businessFileWriter);
-            Stream streamCustomer = items.stream().filter(item -> !item.getLocations().matches(".*(ZMST|ZMOH).*"));
+            Stream streamCustomer = items.stream().filter(Objects::nonNull).filter(item -> item.getLocations() != null)
+                    .filter(item -> !item.getLocations().matches(".*(ZMST|ZMOH).*"));
             gson.toJson(streamCustomer.collect(Collectors.toList()), customerFileWriter);
         } catch (Exception e) {
             logger.error("error occurred while converting the object to json file", e);

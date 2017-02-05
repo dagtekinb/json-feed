@@ -18,8 +18,10 @@ public class Application {
         try {
             ChannelXmlUnmarshaller xmlConverter = new ChannelXmlUnmarshaller();
             Channel channel = xmlConverter.toChannelObject(XML_PATH);
-            ItemJsonConverter jsonConverter = new ItemJsonConverter();
-            jsonConverter.toJsonFile(channel.getItems(), BUSINESS_RESULT_PATH, CUSTOMER_RESULT_PATH);
+            if(channel != null && channel.getItems() != null) {
+                ItemJsonConverter jsonConverter = new ItemJsonConverter();
+                jsonConverter.toJsonFile(channel.getItems(), BUSINESS_RESULT_PATH, CUSTOMER_RESULT_PATH);
+            }
         } catch (Exception e) {
             logger.error("error occurred while generating XML related JSON files", e);
         }
