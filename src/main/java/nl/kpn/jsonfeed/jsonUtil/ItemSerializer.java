@@ -12,12 +12,14 @@ public class ItemSerializer implements JsonSerializer<Item> {
     @Override
     public JsonElement serialize(Item item, Type type, JsonSerializationContext jsonSerializationContext) {
         JsonObject jsonElement = new JsonObject();
-        jsonElement.addProperty("endDate", item.getDescription().getEndDate());
+        jsonElement.addProperty("endDate", item.getDescription() != null ? item.getDescription().getEndDate() : null);
         jsonElement.addProperty("title", item.getTitle());
         jsonElement.addProperty("postalCodes", item.getPostalCodes());
-        jsonElement.addProperty("status", item.getDescription().getStatus());
-        jsonElement.addProperty("startDate", item.getDescription().getStartDate());
-        jsonElement.addProperty("description", item.getDescription().getDescription());
+        if(item.getDescription() != null) {
+            jsonElement.addProperty("status", item.getDescription().getStatus());
+            jsonElement.addProperty("startDate", item.getDescription().getStartDate());
+            jsonElement.addProperty("description", item.getDescription().getDescription());
+        }
         return jsonElement;
     }
 }

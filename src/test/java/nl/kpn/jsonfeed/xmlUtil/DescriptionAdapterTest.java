@@ -5,6 +5,10 @@ import nl.kpn.jsonfeed.model.Item;
 import nl.kpn.jsonfeed.model.enums.Status;
 import org.junit.Test;
 
+/**
+ * Tests custom XML adapter
+ * {@link nl.kpn.jsonfeed.xmlUtil.DescriptionAdapter}
+ */
 public class DescriptionAdapterTest extends TestCase {
 
     private static final String XML_DESCRIPTION = "Als gevolg van een storing kunt u mogelijk in " +
